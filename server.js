@@ -30,6 +30,8 @@ nconf.env().file({ file: 'settings.json' });
 **/
 
 everyauth.debug = true;
+var cfenv = require('cfenv');
+var appEnv = cfenv.getAppEnv(); 
 
 // Configure local password auth
 var usersById = {},
@@ -254,6 +256,6 @@ io.sockets.on('connection', function (socket) {
 * this starts up the server on the given port
 **/
 
-server.listen(app.get('port'), function () {
+server.listen(appEnv.port,"0.0.0.0", function () {
     console.log("Express server listening on port " + app.get('port'));
 });
